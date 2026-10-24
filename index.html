@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,133 +7,260 @@
 <style>
 :root {
   --primary: #087f8c;
+  --primary-hover: #066773;
   --dark: #123b4a;
   --light: #eaf8f8;
-  --white: #fff;
+  --white: #ffffff;
+  --border: #d3dfe6;
+  --danger-bg: #fff0f0;
+  --danger-border: #ffdada;
+  --danger-text: #a52828;
 }
-* { box-sizing: border-box; }
+
+* { 
+  box-sizing: border-box; 
+}
+
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: Arial, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background: #f5f9fc;
   color: #203342;
+  line-height: 1.5;
 }
+
 header {
-  background: white;
+  background: var(--white);
   padding: 16px 6%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 12px;
-  box-shadow: 0 2px 10px #0000000d;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
-.logo { color: var(--primary); font-size: 24px; font-weight: bold; }
+
+.logo { 
+  color: var(--primary); 
+  font-size: 24px; 
+  font-weight: bold; 
+}
+
 nav a {
   text-decoration: none;
   color: var(--dark);
   margin: 0 8px;
   font-weight: bold;
   font-size: 14px;
+  transition: color 0.2s ease;
 }
+
+nav a:hover {
+  color: var(--primary);
+}
+
 .hero {
-  background: linear-gradient(120deg,#dff7f5,#eaf0ff);
+  background: linear-gradient(120deg, #dff7f5, #eaf0ff);
   padding: 55px 6%;
   text-align: center;
 }
-.hero h1 { font-size: clamp(30px,5vw,48px); margin: 0 0 12px; }
-.hero p { color: #526879; line-height: 1.6; }
+
+.hero h1 { 
+  font-size: clamp(30px, 5vw, 48px); 
+  margin: 0 0 12px; 
+  color: var(--dark);
+}
+
+.hero p { 
+  color: #526879; 
+  line-height: 1.6; 
+  max-width: 600px;
+  margin: 0 auto;
+}
+
 .searchbar {
   display: flex;
   gap: 10px;
   max-width: 700px;
   margin: 25px auto 0;
 }
+
 input, select, textarea {
   width: 100%;
   padding: 12px;
-  border: 1px solid #d3dfe6;
+  border: 1px solid var(--border);
   border-radius: 8px;
   font: inherit;
-  background: white;
+  background: var(--white);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(8, 127, 140, 0.15);
+}
+
 button, .btn {
   background: var(--primary);
-  color: white;
+  color: var(--white);
   border: 0;
   border-radius: 8px;
   padding: 12px 18px;
   font-weight: bold;
   cursor: pointer;
   text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.2s ease;
+  white-space: nowrap;
 }
-button:hover, .btn:hover { background: #066773; }
-section { padding: 35px 6%; }
-h2 { color: var(--dark); }
-.sub { color: #637786; line-height: 1.5; }
+
+button:hover, .btn:hover { 
+  background: var(--primary-hover); 
+}
+
+section { 
+  padding: 35px 6%; 
+}
+
+h2 { 
+  color: var(--dark); 
+  margin-top: 0;
+}
+
+.sub { 
+  color: #637786; 
+  line-height: 1.5; 
+  margin-top: -8px;
+}
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 18px;
   margin-top: 22px;
 }
+
 .card {
-  background: white;
+  background: var(--white);
   padding: 22px;
   border-radius: 14px;
-  box-shadow: 0 4px 18px #19394d0c;
+  box-shadow: 0 4px 18px rgba(25, 57, 77, 0.05);
   border: 1px solid #e6edf2;
+  display: flex;
+  flex-direction: column;
 }
-.card h3 { margin-bottom: 8px; }
+
+.card h3 { 
+  margin: 0 0 8px 0; 
+}
+
+.card button {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
 .tag {
   display: inline-block;
+  align-self: flex-start;
   padding: 6px 10px;
   background: var(--light);
   color: var(--primary);
   border-radius: 20px;
   font-size: 12px;
-  margin-bottom: 8px;
+  font-weight: bold;
+  margin-bottom: 12px;
 }
+
 .formbox {
   max-width: 650px;
   margin: 20px auto;
-  background: white;
+  background: var(--white);
   padding: 24px;
   border-radius: 14px;
-  box-shadow: 0 4px 18px #19394d0c;
+  box-shadow: 0 4px 18px rgba(25, 57, 77, 0.05);
+  border: 1px solid #e6edf2;
 }
+
 .formbox label {
   display: block;
   font-weight: bold;
   margin: 14px 0 6px;
 }
-.formbox button { width: 100%; margin-top: 18px; }
+
+.formbox button { 
+  width: 100%; 
+  margin-top: 18px; 
+}
+
 .booking {
-  padding: 14px;
+  padding: 16px;
   border: 1px solid #e0e9ee;
   border-radius: 10px;
-  background: white;
+  background: var(--white);
   margin: 12px 0;
   overflow-wrap: anywhere;
 }
+
+.booking strong {
+  font-size: 1.1em;
+  color: var(--dark);
+}
+
+.booking p {
+  margin: 4px 0;
+}
+
 .danger {
-  background: #fff0f0;
-  border: 1px solid #ffdada;
+  background: var(--danger-bg);
+  border: 1px solid var(--danger-border);
   border-radius: 12px;
   padding: 20px;
 }
-.danger h2 { color: #a52828; }
+
+.danger h2 { 
+  color: var(--danger-text); 
+}
+
+.danger .btn {
+  background: var(--danger-text);
+}
+
+.danger .btn:hover {
+  background: #801f1f;
+}
+
 footer {
   background: var(--dark);
-  color: white;
+  color: var(--white);
   text-align: center;
   padding: 25px;
   line-height: 1.7;
 }
-.notice { font-size: 13px; color: #687b87; }
-#message { margin-top: 12px; font-weight: bold; }
-[hidden] { display: none !important; }
-@media(max-width:600px) {
+
+.notice { 
+  font-size: 13px; 
+  color: #687b87; 
+}
+
+footer .notice {
+  color: #a0b0bc;
+}
+
+#message { 
+  margin-top: 12px; 
+  font-weight: bold; 
+  color: var(--primary);
+}
+
+[hidden] { 
+  display: none !important; 
+}
+
+@media (max-width: 600px) {
   header { padding: 15px 4%; }
   nav { line-height: 2.2; }
   .hero { padding: 38px 5%; }
@@ -159,8 +285,7 @@ footer {
   <h1>Your Health, Our Priority 💙</h1>
   <p>Discover healthcare options, explore doctors and manage your appointments.</p>
   <div class="searchbar">
-    <input id="search" placeholder="Search doctor, specialty or hospital"
-           aria-label="Search doctors and hospitals">
+    <input id="search" placeholder="Search doctor, specialty or hospital" aria-label="Search doctors and hospitals">
     <button type="button" id="searchBtn">Search</button>
   </div>
   <p class="notice">Demo directory: listed providers are sample entries, not verified hospitals.</p>
@@ -195,9 +320,7 @@ footer {
     <input id="patient" required maxlength="80" autocomplete="name">
 
     <label for="phone">Phone number</label>
-    <input id="phone" type="tel" required
-           pattern="[0-9+() -]{7,18}" autocomplete="tel"
-           placeholder="Enter contact number">
+    <input id="phone" type="tel" required pattern="[0-9+() -]{7,18}" autocomplete="tel" placeholder="Enter contact number">
 
     <label for="doctorSelect">Select doctor</label>
     <select id="doctorSelect" required>
@@ -219,8 +342,7 @@ footer {
     </select>
 
     <label for="reason">Reason for visit (optional)</label>
-    <textarea id="reason" rows="3" maxlength="300"
-              placeholder="Brief reason for consultation"></textarea>
+    <textarea id="reason" rows="3" maxlength="300" placeholder="Brief reason for consultation"></textarea>
 
     <button type="submit">Save Appointment Request</button>
     <p id="message" role="status" aria-live="polite"></p>
@@ -253,27 +375,18 @@ footer {
 <script>
 "use strict";
 
-// These are illustrative entries, not real or verified providers.
 const hospitals = [
-  { name: "City Care Hospital (Demo)", city: "Vijayawada",
-    type: "General care" },
-  { name: "Green Life Medical Centre (Demo)", city: "Guntur",
-    type: "Multi-specialty" },
-  { name: "Sunrise Health Centre (Demo)", city: "Hyderabad",
-    type: "General care" }
+  { name: "City Care Hospital (Demo)", city: "Vijayawada", type: "General care" },
+  { name: "Green Life Medical Centre (Demo)", city: "Guntur", type: "Multi-specialty" },
+  { name: "Sunrise Health Centre (Demo)", city: "Hyderabad", type: "General care" }
 ];
 
 const doctors = [
-  { id: "d1", name: "Dr. Ananya (Demo)", specialty: "General Physician",
-    hospital: hospitals[0].name },
-  { id: "d2", name: "Dr. Rahul (Demo)", specialty: "Cardiologist",
-    hospital: hospitals[1].name },
-  { id: "d3", name: "Dr. Priya (Demo)", specialty: "Dermatologist",
-    hospital: hospitals[0].name },
-  { id: "d4", name: "Dr. Kavya (Demo)", specialty: "Gynecologist",
-    hospital: hospitals[2].name },
-  { id: "d5", name: "Dr. Arjun (Demo)", specialty: "Pediatrician",
-    hospital: hospitals[1].name }
+  { id: "d1", name: "Dr. Ananya (Demo)", specialty: "General Physician", hospital: hospitals[0].name },
+  { id: "d2", name: "Dr. Rahul (Demo)", specialty: "Cardiologist", hospital: hospitals[1].name },
+  { id: "d3", name: "Dr. Priya (Demo)", specialty: "Dermatologist", hospital: hospitals[0].name },
+  { id: "d4", name: "Dr. Kavya (Demo)", specialty: "Gynecologist", hospital: hospitals[2].name },
+  { id: "d5", name: "Dr. Arjun (Demo)", specialty: "Pediatrician", hospital: hospitals[1].name }
 ];
 
 const $ = id => document.getElementById(id);
@@ -372,13 +485,13 @@ function renderBookings() {
         <strong>${safeText(b.patient)}</strong>
         <p>Doctor: ${safeText(b.doctor)}</p>
         <p>Date: ${safeText(b.date)} | Time: ${safeText(b.time)}</p>
-        <p>Status: Saved locally — not sent to hospital</p>
+        <p class="notice">Status: Saved locally — not sent to hospital</p>
       </article>
     `).join("")
     : "<p>No saved appointment requests yet.</p>";
 }
 
-$("date").min = new Date().toLocaleDateString("en-CA");
+$("date").min = new Date().toISOString().split("T")[0];
 
 $("bookingForm").addEventListener("submit", e => {
   e.preventDefault();
