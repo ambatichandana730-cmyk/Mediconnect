@@ -2,53 +2,437 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MediConnect</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f0f8ff;
-      text-align: center;
-      padding: 30px;
-    }
-    h1 { color: #087f8c; }
-    .card {
-      background: white;
-      padding: 20px;
-      margin: 15px auto;
-      max-width: 400px;
-      border-radius: 12px;
-    }
-    button {
-      background: #087f8c;
-      color: white;
-      padding: 12px 20px;
-      border: none;
-      border-radius: 8px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MediConnect | Healthcare Made Easy</title>
+<style>
+:root {
+  --primary: #087f8c;
+  --dark: #123b4a;
+  --light: #eaf8f8;
+  --white: #fff;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f9fc;
+  color: #203342;
+}
+header {
+  background: white;
+  padding: 16px 6%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  box-shadow: 0 2px 10px #0000000d;
+}
+.logo { color: var(--primary); font-size: 24px; font-weight: bold; }
+nav a {
+  text-decoration: none;
+  color: var(--dark);
+  margin: 0 8px;
+  font-weight: bold;
+  font-size: 14px;
+}
+.hero {
+  background: linear-gradient(120deg,#dff7f5,#eaf0ff);
+  padding: 55px 6%;
+  text-align: center;
+}
+.hero h1 { font-size: clamp(30px,5vw,48px); margin: 0 0 12px; }
+.hero p { color: #526879; line-height: 1.6; }
+.searchbar {
+  display: flex;
+  gap: 10px;
+  max-width: 700px;
+  margin: 25px auto 0;
+}
+input, select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d3dfe6;
+  border-radius: 8px;
+  font: inherit;
+  background: white;
+}
+button, .btn {
+  background: var(--primary);
+  color: white;
+  border: 0;
+  border-radius: 8px;
+  padding: 12px 18px;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+button:hover, .btn:hover { background: #066773; }
+section { padding: 35px 6%; }
+h2 { color: var(--dark); }
+.sub { color: #637786; line-height: 1.5; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+  gap: 18px;
+  margin-top: 22px;
+}
+.card {
+  background: white;
+  padding: 22px;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px #19394d0c;
+  border: 1px solid #e6edf2;
+}
+.card h3 { margin-bottom: 8px; }
+.tag {
+  display: inline-block;
+  padding: 6px 10px;
+  background: var(--light);
+  color: var(--primary);
+  border-radius: 20px;
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.formbox {
+  max-width: 650px;
+  margin: 20px auto;
+  background: white;
+  padding: 24px;
+  border-radius: 14px;
+  box-shadow: 0 4px 18px #19394d0c;
+}
+.formbox label {
+  display: block;
+  font-weight: bold;
+  margin: 14px 0 6px;
+}
+.formbox button { width: 100%; margin-top: 18px; }
+.booking {
+  padding: 14px;
+  border: 1px solid #e0e9ee;
+  border-radius: 10px;
+  background: white;
+  margin: 12px 0;
+  overflow-wrap: anywhere;
+}
+.danger {
+  background: #fff0f0;
+  border: 1px solid #ffdada;
+  border-radius: 12px;
+  padding: 20px;
+}
+.danger h2 { color: #a52828; }
+footer {
+  background: var(--dark);
+  color: white;
+  text-align: center;
+  padding: 25px;
+  line-height: 1.7;
+}
+.notice { font-size: 13px; color: #687b87; }
+#message { margin-top: 12px; font-weight: bold; }
+[hidden] { display: none !important; }
+@media(max-width:600px) {
+  header { padding: 15px 4%; }
+  nav { line-height: 2.2; }
+  .hero { padding: 38px 5%; }
+  .searchbar { flex-direction: column; }
+  section { padding: 28px 5%; }
+}
+</style>
 </head>
 <body>
-  <h1>🏥 MediConnect</h1>
-  <p>Your healthcare, connected.</p>
 
-  <div class="card">
-    <h2>Find Hospitals</h2>
-    <p>Search for hospitals near your selected location.</p>
-  </div>
+<header>
+  <div class="logo">🏥 MediConnect</div>
+  <nav>
+    <a href="#hospitals">Hospitals</a>
+    <a href="#doctors">Doctors</a>
+    <a href="#appointment">Book Visit</a>
+    <a href="#mybookings">My Bookings</a>
+  </nav>
+</header>
 
-  <div class="card">
-    <h2>Find Doctors</h2>
-    <p>Explore doctors and their specialties.</p>
+<div class="hero">
+  <h1>Your Health, Our Priority 💙</h1>
+  <p>Discover healthcare options, explore doctors and manage your appointments.</p>
+  <div class="searchbar">
+    <input id="search" placeholder="Search doctor, specialty or hospital"
+           aria-label="Search doctors and hospitals">
+    <button type="button" id="searchBtn">Search</button>
   </div>
+  <p class="notice">Demo directory: listed providers are sample entries, not verified hospitals.</p>
+</div>
 
-  <div class="card">
-    <h2>Appointments</h2>
-    <p>Plan your doctor consultation.</p>
-    <button onclick="alert('Appointment feature coming soon!')">
-      Book Appointment
-    </button>
+<section id="hospitals">
+  <h2>🏥 Explore Hospitals</h2>
+  <p class="sub">Search the sample hospital directory below.</p>
+  <div class="grid" id="hospitalList"></div>
+</section>
+
+<section id="doctors">
+  <h2>👩‍⚕️ Find Your Doctor</h2>
+  <p class="sub">Choose a specialty and select a doctor to request an appointment.</p>
+  <select id="specialty" aria-label="Filter by specialty">
+    <option value="">All specialties</option>
+    <option>General Physician</option>
+    <option>Cardiologist</option>
+    <option>Dermatologist</option>
+    <option>Gynecologist</option>
+    <option>Pediatrician</option>
+  </select>
+  <div class="grid" id="doctorList"></div>
+  <p id="noResults" hidden>No matching demo doctors found. Try another search.</p>
+</section>
+
+<section id="appointment">
+  <h2>📅 Request an Appointment</h2>
+  <p class="sub">Fill in the form. Your request will be saved in this browser only.</p>
+  <form class="formbox" id="bookingForm">
+    <label for="patient">Patient name</label>
+    <input id="patient" required maxlength="80" autocomplete="name">
+
+    <label for="phone">Phone number</label>
+    <input id="phone" type="tel" required
+           pattern="[0-9+() -]{7,18}" autocomplete="tel"
+           placeholder="Enter contact number">
+
+    <label for="doctorSelect">Select doctor</label>
+    <select id="doctorSelect" required>
+      <option value="">Choose a doctor</option>
+    </select>
+
+    <label for="date">Preferred date</label>
+    <input id="date" type="date" required>
+
+    <label for="time">Preferred time</label>
+    <select id="time" required>
+      <option value="">Select time</option>
+      <option>09:00 AM</option>
+      <option>10:00 AM</option>
+      <option>11:00 AM</option>
+      <option>02:00 PM</option>
+      <option>03:00 PM</option>
+      <option>04:00 PM</option>
+    </select>
+
+    <label for="reason">Reason for visit (optional)</label>
+    <textarea id="reason" rows="3" maxlength="300"
+              placeholder="Brief reason for consultation"></textarea>
+
+    <button type="submit">Save Appointment Request</button>
+    <p id="message" role="status" aria-live="polite"></p>
+    <p class="notice">Do not enter sensitive medical details. This demo does not send your request to a hospital.</p>
+  </form>
+</section>
+
+<section id="mybookings">
+  <h2>📋 My Saved Appointments</h2>
+  <p class="sub">Saved requests on this browser and device.</p>
+  <div id="bookingList"></div>
+  <button type="button" id="clearBookings">Clear saved requests</button>
+</section>
+
+<section id="emergency">
+  <div class="danger">
+    <h2>🚨 Emergency Help</h2>
+    <p>If you are in India and need emergency assistance, call 112.</p>
+    <a class="btn" href="tel:112">Call 112</a>
+    <p class="notice">Use this only for emergencies. This website does not dispatch an ambulance.</p>
   </div>
+</section>
+
+<footer>
+  <strong>MediConnect</strong><br>
+  Making healthcare easier to navigate.<br>
+  <span class="notice">Educational prototype. Not a medical service.</span>
+</footer>
+
+<script>
+"use strict";
+
+// These are illustrative entries, not real or verified providers.
+const hospitals = [
+  { name: "City Care Hospital (Demo)", city: "Vijayawada",
+    type: "General care" },
+  { name: "Green Life Medical Centre (Demo)", city: "Guntur",
+    type: "Multi-specialty" },
+  { name: "Sunrise Health Centre (Demo)", city: "Hyderabad",
+    type: "General care" }
+];
+
+const doctors = [
+  { id: "d1", name: "Dr. Ananya (Demo)", specialty: "General Physician",
+    hospital: hospitals[0].name },
+  { id: "d2", name: "Dr. Rahul (Demo)", specialty: "Cardiologist",
+    hospital: hospitals[1].name },
+  { id: "d3", name: "Dr. Priya (Demo)", specialty: "Dermatologist",
+    hospital: hospitals[0].name },
+  { id: "d4", name: "Dr. Kavya (Demo)", specialty: "Gynecologist",
+    hospital: hospitals[2].name },
+  { id: "d5", name: "Dr. Arjun (Demo)", specialty: "Pediatrician",
+    hospital: hospitals[1].name }
+];
+
+const $ = id => document.getElementById(id);
+let query = "";
+
+function safeText(value) {
+  return String(value).replace(/[&<>"']/g, ch => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;",
+    '"': "&quot;", "'": "&#39;"
+  })[ch]);
+}
+
+function renderHospitals() {
+  const list = hospitals.filter(h =>
+    (h.name + " " + h.city + " " + h.type)
+      .toLowerCase().includes(query)
+  );
+  $("hospitalList").innerHTML = list.map(h => `
+    <article class="card">
+      <span class="tag">${safeText(h.type)}</span>
+      <h3>🏥 ${safeText(h.name)}</h3>
+      <p>📍 ${safeText(h.city)}</p>
+      <p class="notice">Demo listing; details not verified.</p>
+    </article>
+  `).join("");
+}
+
+function renderDoctors() {
+  const specialty = $("specialty").value;
+  const list = doctors.filter(d =>
+    (!specialty || d.specialty === specialty) &&
+    (d.name + " " + d.specialty + " " + d.hospital)
+      .toLowerCase().includes(query)
+  );
+
+  $("doctorList").innerHTML = list.map(d => `
+    <article class="card">
+      <span class="tag">${safeText(d.specialty)}</span>
+      <h3>👩‍⚕️ ${safeText(d.name)}</h3>
+      <p>🏥 ${safeText(d.hospital)}</p>
+      <p class="notice">Sample doctor; not a real appointment provider.</p>
+      <button type="button" data-doctor="${safeText(d.id)}">
+        Request appointment
+      </button>
+    </article>
+  `).join("");
+
+  $("noResults").hidden = list.length !== 0;
+
+  $("doctorSelect").innerHTML =
+    '<option value="">Choose a doctor</option>' +
+    doctors.map(d =>
+      `<option value="${safeText(d.id)}">${safeText(d.name)} — ${safeText(d.specialty)}</option>`
+    ).join("");
+}
+
+$("searchBtn").addEventListener("click", () => {
+  query = $("search").value.trim().toLowerCase();
+  renderHospitals();
+  renderDoctors();
+});
+
+$("search").addEventListener("keydown", e => {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    $("searchBtn").click();
+  }
+});
+
+$("specialty").addEventListener("change", renderDoctors);
+
+$("doctorList").addEventListener("click", e => {
+  const button = e.target.closest("[data-doctor]");
+  if (!button) return;
+  $("doctorSelect").value = button.dataset.doctor;
+  $("appointment").scrollIntoView({ behavior: "smooth" });
+});
+
+function getBookings() {
+  try {
+    return JSON.parse(localStorage.getItem("mediconnectBookings") || "[]");
+  } catch {
+    return [];
+  }
+}
+
+function saveBookings(bookings) {
+  localStorage.setItem("mediconnectBookings", JSON.stringify(bookings));
+}
+
+function renderBookings() {
+  const bookings = getBookings();
+  $("bookingList").innerHTML = bookings.length
+    ? bookings.map(b => `
+      <article class="booking">
+        <strong>${safeText(b.patient)}</strong>
+        <p>Doctor: ${safeText(b.doctor)}</p>
+        <p>Date: ${safeText(b.date)} | Time: ${safeText(b.time)}</p>
+        <p>Status: Saved locally — not sent to hospital</p>
+      </article>
+    `).join("")
+    : "<p>No saved appointment requests yet.</p>";
+}
+
+$("date").min = new Date().toLocaleDateString("en-CA");
+
+$("bookingForm").addEventListener("submit", e => {
+  e.preventDefault();
+
+  const doctor = doctors.find(d => d.id === $("doctorSelect").value);
+  if (!doctor) {
+    $("message").textContent = "Please select a doctor.";
+    return;
+  }
+
+  if ($("date").value < $("date").min) {
+    $("message").textContent = "Please choose today or a future date.";
+    return;
+  }
+
+  const booking = {
+    patient: $("patient").value.trim(),
+    phone: $("phone").value.trim(),
+    doctor: doctor.name + " — " + doctor.specialty,
+    date: $("date").value,
+    time: $("time").value,
+    reason: $("reason").value.trim()
+  };
+
+  if (!booking.patient || !booking.phone) {
+    $("message").textContent = "Please complete the required fields.";
+    return;
+  }
+
+  try {
+    const bookings = getBookings();
+    bookings.push(booking);
+    saveBookings(bookings);
+    renderBookings();
+    $("bookingForm").reset();
+    $("message").textContent =
+      "Request saved in this browser! No hospital has been notified.";
+  } catch {
+    $("message").textContent =
+      "Could not save. Check browser storage settings and try again.";
+  }
+});
+
+$("clearBookings").addEventListener("click", () => {
+  if (!confirm("Delete all saved appointment requests from this browser?")) return;
+  localStorage.removeItem("mediconnectBookings");
+  renderBookings();
+  $("message").textContent = "Saved requests cleared.";
+});
+
+renderHospitals();
+renderDoctors();
+renderBookings();
+</script>
 </body>
 </html>
+
